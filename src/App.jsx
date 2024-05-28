@@ -8,7 +8,6 @@ function App() {
 
   return (
     <>
-      <h1>Here we start the project</h1>
       <Home/>
     </>
   )
