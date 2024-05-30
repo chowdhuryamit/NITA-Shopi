@@ -8,6 +8,7 @@ function App() {
       <Header/>
       <br />
        <Home/> 
+       <Home/>
     </>
   )
 }
