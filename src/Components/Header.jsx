@@ -10,16 +10,16 @@ const Header = () => {
 
         <div className="space-x-4 text-lg flex-center">
           {/* menu links */}
-          <a href="/home" className="hover:underline underline-offset-8 hover:text-blue-600">
+          <a href="/Home" className="hover:underline underline-offset-8 hover:text-blue-600">
             Home
           </a>
-          <a href="/services" className="hover:underline underline-offset-8 hover:text-blue-600">
+          <a href="/Service" className="hover:underline underline-offset-8 hover:text-blue-600">
             Services
           </a>
-          <a href="/about_us" className="hover:underline underline-offset-8 hover:text-blue-600">
+          <a href="/About" className="hover:underline underline-offset-8 hover:text-blue-600">
             About us
           </a>
-          <a href="/help" className="hover:underline underline-offset-8 hover:text-blue-600">
+          <a href="/Help" className="hover:underline underline-offset-8 hover:text-blue-600">
             Help
           </a>
         </div>

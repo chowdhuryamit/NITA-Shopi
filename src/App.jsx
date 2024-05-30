@@ -5,12 +5,18 @@ import './App.css'
 function App() {
 
   return (
-    <>
+    <Router>
       <Header/>
-      <br />
-      <Home/>
-    </>
-  )
-}
+      <Routes>
+        <Route exact path="/Home" element={<Home />} />
+        <Route path="/Service" element={<Service />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Help" element={<Help />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
+
+ 
