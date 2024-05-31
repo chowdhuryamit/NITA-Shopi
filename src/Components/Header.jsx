@@ -2,7 +2,7 @@ const Header = () => {
 
   return (
     <>
-      <div className=" h-20 border main flex justify-between items-center px-16 border-black ">
+      <div className=" h-20 border main flex justify-between items-center px-16 border-black bg-[#3BEA1E]">
         <div >
           {/* brand logo */}
           <h1 className="text-2xl font-bold">LOGO NAME</h1>
