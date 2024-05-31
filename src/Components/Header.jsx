@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -27,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="h-20 border border-black flex justify-between items-center px-4 md:px-16">
+      <div className="h-20 border border-black flex justify-between items-center px-4 md:px-16 bg-[#3BEA1E] rounded-b-lg">
         <div>
           {/* brand logo */}
           <h1 className="text-xl md:text-2xl font-bold">LOGO NAME</h1>
@@ -61,7 +62,7 @@ const Header = () => {
 
         <div className="hidden md:block">
           {/* Become seller Buttons */}
-          <button className="bg-yellow-400 hover:bg-blue-600 text-black hover:text-white font-bold py-1 md:py-2 px-2 md:px-4 rounded-xl">
+          <button className="bg-yellow-300 hover:bg-blue-600 text-black hover:text-white font-bold py-1 md:py-2 px-2 md:px-4 rounded-xl">
             Become seller
           </button>
         </div>
