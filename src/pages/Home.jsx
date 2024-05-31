@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaArrowCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 // import Card from './Components/Card';
 
-import Card from '../Components/Card';
+// import Card from '../Components/Card';
 
 const slides = [
   "https://images.pexels.com/photos/462118/pexels-photo-462118.jpeg?cs=srgb&dl=bloom-blooming-blossom-462118.jpg&fm=jpg",
@@ -36,7 +36,7 @@ export default function Home() {
   };
 // bg-gradient-to-r from-green-600 to-green-100
   return (
-    <div className="bg-white">
+    <div className="bg-gradient-to-r from-green-600 to-green-100">
       {/* Left-Side */}
       <section className="bg-gradient-to-r from-#ff0000 to-#00ff00 bg-opacity-30 py-10 sm:py-16 lg:py-24">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -74,11 +74,11 @@ export default function Home() {
       </section>
 
       {/* Facilities */}
-      <Card
-      title={"First Card"}
-      imagesrc={"https://static.vecteezy.com/system/resources/previews/000/587/989/original/automotive-car-logo-design-car-logo-vector-illustration.jpg"}
-      content={"fwalas kbhjqAHLSWAF HUJWdshblasjdc ljwqhdjsKHBGKGDCSE OUWGSAJLx ihwldu piLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLGGGGGGGGGGGGGGGGGGGGGGGGGfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiddffffffffffffffgjfcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"}
-      />
+      {/* <Card */}
+      {/* title={"First Card"} */}
+      {/* imagesrc={"https://static.vecteezy.com/system/resources/previews/000/587/989/original/automotive-car-logo-design-car-logo-vector-illustration.jpg"} */}
+      {/* content={"fwalas kbhjqAHLSWAF HUJWdshblasjdc ljwqhdjsKHBGKGDCSE OUWGSAJLx ihwldu piLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLGGGGGGGGGGGGGGGGGGGGGGGGGfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiddffffffffffffffgjfcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"} */}
+      {/* /> */}
       
       
 

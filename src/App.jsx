@@ -1,22 +1,26 @@
-import Header from './components/Header'
-import Home from './pages/Home'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './Components/Header';
+import Home from './pages/Home';
+import Service from './pages/Service';
+import About from './pages/About';
+import Help from './pages/Help';
+import './App.css';
 
 function App() {
-
   return (
     <Router>
-      <Header/>
+      <Header />
       <Routes>
-        <Route exact path="/Home" element={<Home />} />
-        <Route path="/Service" element={<Service />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Help" element={<Help />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/home" element={<Home />} />
+        <Route path="/service" element={<Service />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/help" element={<Help />} />
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;
 
- 
