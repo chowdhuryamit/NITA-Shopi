@@ -44,14 +44,14 @@ const Header = () => {
           </div>
 
           <div className="space-x-2 md:space-x-4 text-sm md:text-lg hidden md:flex">
-            <Link to="/Home" onClick={handleNavbarItemClick} className="hover:underline underline-offset-8 hover:text-blue-600 text-white text-2xl">
+            <Link to="/Home" onClick={handleNavbarItemClick} className="hover:underline underline-offset-8 hover:text-blue-600 text-black text-2xl">
               Home
             </Link>
             <div className="relative">
-              <button onClick={toggleDropdown} className="hover:underline underline-offset-8 hover:text-blue-600 flex text-white text-2xl">
+              <button onClick={toggleDropdown} className="hover:underline underline-offset-8 hover:text-blue-600 flex text-black text-2xl">
                 Services
                 <div className="pt-2 px-1">
-                  {isDropdownOpen ? <SlArrowUp /> : <SlArrowDown />}
+                {isDropdownOpen ? <SlArrowUp className="w-5 h-5" /> : <SlArrowDown className="w-5 h-5" />}
                 </div>
               </button>
               {isDropdownOpen && (
@@ -63,7 +63,7 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <Link to="/About" onClick={handleNavbarItemClick} className="hover:underline underline-offset-8 hover:text-blue-600 text-white text-2xl">
+            <Link to="/About" onClick={handleNavbarItemClick} className="hover:underline underline-offset-8 hover:text-blue-600 text-black text-2xl">
               About us
             </Link>
             <div className="relative">
@@ -91,14 +91,14 @@ const Header = () => {
 
         {isMenuOpen && (
           <div className="md:hidden text-center absolute top-20 right-0 bg-[#3BEA1E] border border-black shadow-lg rounded-lg w-full flex flex-col items-end space-y-2 mt-2 p-4">
-            <Link to="/Home" onClick={handleNavbarItemClick} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 text-white">
+            <Link to="/Home" onClick={handleNavbarItemClick} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 text-black">
               Home
             </Link>
             <div className="relative">
-              <button onClick={toggleDropdown} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 flex text-white">
+              <button onClick={toggleDropdown} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 flex text-black">
                 Services
                 <div className="pt-2 px-1">
-                  {isDropdownOpen ? <SlArrowUp /> : <SlArrowDown />}
+                {isDropdownOpen ? <SlArrowUp className="w-5 h-5" /> : <SlArrowDown className="w-5 h-5" />}
                 </div>
               </button>
               {isDropdownOpen && (
@@ -110,7 +110,7 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <Link to="/About" onClick={handleNavbarItemClick} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 text-white">
+            <Link to="/About" onClick={handleNavbarItemClick} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 text-black">
               About us
             </Link>
             <div className="relative">
