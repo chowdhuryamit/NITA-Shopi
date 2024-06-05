@@ -52,7 +52,7 @@ export default function Home() {
               </p>
             </div>
             {/* Right-Side */}
-            <div className="carousel rounded-3xl relative">
+            <div className="carousel rounded-3xl relative ">
               <img
                 src={slides[currentSlideIndex]}
                 alt={`Slide ${currentSlideIndex + 1}`}
@@ -80,7 +80,8 @@ export default function Home() {
     <h3>Our Facilities</h3>
   </div>
   <div className="w-60 h-1 border-b-4 border-green-400 my-3"></div>
-  <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+  
+  <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4">
     <div className="flex flex-col justify-center items-center">
       <img
         src="https://tse3.mm.bing.net/th/id/OIP.qGa4rZh-9Zof10CcbaIAfAHaF3?rs=1&pid=ImgDetMain"
