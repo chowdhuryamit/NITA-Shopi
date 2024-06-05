@@ -15,7 +15,7 @@ export default function Home() {
       setCurrentSlideIndex((prevIndex) =>
         prevIndex === slides.length - 1 ? 0 : prevIndex + 1
       );
-    }, 4000); // Change slide every 3 seconds (3000 milliseconds)
+    }, 4000); // Change slide every 4 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -33,38 +33,38 @@ export default function Home() {
   };
 
   return (
-
-    <div>
-
+    <div className="mt-12">
       {/* Left-Side */}
-      <section className="bg-[#FCF8F1] bg-opacity-30 py-10 sm:py-16 lg:py-24">
+      <section className="bg-[#feeccd] bg-opacity-30 py-10 sm:py-16 lg:py-12">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
-            <div>
+            <div >
               <p className="text-base font-semibold tracking-wider text-blue-600 uppercase">
-                A social media for learners
+                Welcome to Multi-Service Platform
               </p>
-              <h1 className="mt-4 text-4xl font-bold text-black lg:mt-8 sm:text-6xl xl:text-8xl">
-                Connect & learn from the experts
+              <h1 className="mt-4 text-4xl font-bold text-black lg:mt-8 sm:text-6xl xl:text-7xl">
+              Explore, Buy, Sell, and Enjoy!
               </h1>
-              <p className="mt-4 text-base text-black lg:mt-8 sm:text-xl">
-                Grow your career fast with the right mentor.
-              </p>
+              
+              <button className="bg-[#3BEA1E] hover:bg-blue-600 text-black hover:text-white font-bold py-1 md:py-2 px-2 md:px-4 rounded-xl mt-14">
+              Get started
+            </button>
             </div>
             {/* Right-Side */}
             <div className="carousel rounded-3xl relative ">
               <img
                 src={slides[currentSlideIndex]}
                 alt={`Slide ${currentSlideIndex + 1}`}
+                className="w-full h-full object-cover rounded-3xl"
               />
               <div className="absolute top-1/2 transform -translate-y-1/2 left-4">
                 <button onClick={goToPrevSlide}>
-                  <FaArrowAltCircleLeft />
+                  <FaArrowAltCircleLeft size={30} />
                 </button>
               </div>
               <div className="absolute top-1/2 transform -translate-y-1/2 right-4">
                 <button onClick={goToNextSlide}>
-                  <FaArrowCircleRight />
+                  <FaArrowCircleRight size={30} />
                 </button>
               </div>
             </div>
@@ -74,58 +74,55 @@ export default function Home() {
 
       {/* Facilities */}
 
-
       <div className="flex flex-col items-center text-center">
-  <div className="text-center text-4xl font-bold">
-    <h3>Our Facilities</h3>
-  </div>
-  <div className="w-60 h-1 border-b-4 border-green-400 my-3"></div>
-  
-  <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4">
-    <div className="flex flex-col justify-center items-center">
-      <img
-        src="https://tse3.mm.bing.net/th/id/OIP.qGa4rZh-9Zof10CcbaIAfAHaF3?rs=1&pid=ImgDetMain"
-        alt=""
-        className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500"
-      />
-      <p className="font-semibold mt-4">
-        Old Products: "Find hidden treasures among gently used items!"
-      </p>
+        <div className="text-center text-4xl font-bold pt-4">
+          <h3>Our Facilities</h3>
+        </div>
+        <div className="w-60 h-1 border-b-4 border-green-400 my-3"></div>
+        
+        <div className="w-full bg-[#feeccd] bg-opacity-30 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4 pb-12 ">
+          <div className="flex flex-col justify-center items-center overflow-hidden pt-8">
+            <img
+              src="https://tse3.mm.bing.net/th/id/OIP.qGa4rZh-9Zof10CcbaIAfAHaF3?rs=1&pid=ImgDetMain"
+              alt=""
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500 transform transition-transform duration-300 hover:scale-110"
+            />
+            <p className="font-semibold mt-4">
+            Uncover hidden gems in lightly used products!
+            </p>
+          </div>
+          <div className="flex flex-col justify-center items-center overflow-hidden pt-8">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/016/471/452/original/abstract-modern-ecommerce-logo-ecommerce-logo-design-shop-logo-design-template-creative-ecommerce-logo-vector.jpg"
+              alt=""
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500 transform transition-transform duration-300 hover:scale-110"
+            />
+            <p className="font-semibold mt-4">
+            Find the newest top items at amazing deals!
+            </p>
+          </div>
+          <div className="flex flex-col justify-center items-center overflow-hidden pt-8">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/000/623/004/original/auto-car-logo-template-vector-icon.jpg"
+              alt=""
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500 transform transition-transform duration-300 hover:scale-110"
+            />
+            <p className="font-semibold mt-4">
+            Need a quick ride? Link up with a driver now!
+            </p>
+          </div>
+          <div className="flex flex-col justify-center items-center overflow-hidden pt-8">
+            <img
+              src="https://png.pngtree.com/template/20200704/ourlarge/pngtree-restaurant-logo-design-vector-template-image_388753.jpg"
+              alt=""
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500 transform transition-transform duration-300 hover:scale-110"
+            />
+            <p className="font-semibold mt-4">
+            Indulge in a variety of tasty culinary treats!
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div className="flex flex-col justify-center items-center">
-      <img
-        src="https://static.vecteezy.com/system/resources/previews/016/471/452/original/abstract-modern-ecommerce-logo-ecommerce-logo-design-shop-logo-design-template-creative-ecommerce-logo-vector.jpg"
-        alt=""
-        className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500"
-      />
-      <p className="font-semibold mt-4">
-        New Products: "Discover the latest and greatest products at unbeatable prices!"
-      </p>
-    </div>
-    <div className="flex flex-col justify-center items-center">
-      <img
-        src="https://static.vecteezy.com/system/resources/previews/000/623/004/original/auto-car-logo-template-vector-icon.jpg"
-        alt=""
-        className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500"
-      />
-      <p className="font-semibold mt-4">
-        Auto Services: "Need a ride urgently? Connect with a driver instantly!"
-      </p>
-    </div>
-    <div className="flex flex-col justify-center items-center">
-      <img
-        src="https://png.pngtree.com/template/20200704/ourlarge/pngtree-restaurant-logo-design-vector-template-image_388753.jpg"
-        alt=""
-        className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500"
-      />
-      <p className="font-semibold mt-4">
-        Restaurant Menus: "Satisfy your cravings with a diverse range of culinary delights!"
-      </p>
-    </div>
-  </div>
-</div>
-
-    </div>
-    
   );
 }
