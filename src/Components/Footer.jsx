@@ -25,7 +25,7 @@ export default function Footer() {
                 <a href="/signup">SignUp</a>
               </li>
               <li className="mb-2 hover:underline">
-                <a href="/logout">Logout</a>
+                <a href="/Logout">Logout</a>
               </li>
             </ul>
           </section>
