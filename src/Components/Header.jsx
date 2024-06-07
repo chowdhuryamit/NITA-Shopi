@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { SlArrowDown, SlArrowUp } from 'react-icons/sl';
 import { FaUser } from 'react-icons/fa';
@@ -7,24 +7,11 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const dropdownTimeout = useRef(null);
+  const profileDropdownTimeout = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    setIsDropdownOpen(false);
-    setIsProfileDropdownOpen(false);
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-    setIsProfileDropdownOpen(false);
-  };
-
-  const toggleProfileDropdown = () => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
-    setIsDropdownOpen(false);
-  };
-
-  const closeDropdown = () => {
     setIsDropdownOpen(false);
     setIsProfileDropdownOpen(false);
   };
@@ -33,6 +20,32 @@ const Header = () => {
     setIsMenuOpen(false);
     setIsDropdownOpen(false);
     setIsProfileDropdownOpen(false);
+  };
+
+  const handleMouseEnterDropdown = () => {
+    if (dropdownTimeout.current) {
+      clearTimeout(dropdownTimeout.current);
+    }
+    setIsDropdownOpen(true);
+  };
+
+  const handleMouseLeaveDropdown = () => {
+    dropdownTimeout.current = setTimeout(() => {
+      setIsDropdownOpen(false);
+    }, 200); // Adjust the delay as needed
+  };
+
+  const handleMouseEnterProfileDropdown = () => {
+    if (profileDropdownTimeout.current) {
+      clearTimeout(profileDropdownTimeout.current);
+    }
+    setIsProfileDropdownOpen(true);
+  };
+
+  const handleMouseLeaveProfileDropdown = () => {
+    profileDropdownTimeout.current = setTimeout(() => {
+      setIsProfileDropdownOpen(false);
+    }, 200); // Adjust the delay as needed
   };
 
   return (
@@ -47,15 +60,19 @@ const Header = () => {
             <Link to="/Home" onClick={handleNavbarItemClick} className="hover:underline underline-offset-8 hover:text-blue-600 text-black text-2xl">
               Home
             </Link>
-            <div className="relative">
-              <button onClick={toggleDropdown} className="hover:underline underline-offset-8 hover:text-blue-600 flex text-black text-2xl">
+            <div
+              className="relative"
+              onMouseEnter={handleMouseEnterDropdown}
+              onMouseLeave={handleMouseLeaveDropdown}
+            >
+              <button className="hover:underline underline-offset-8 hover:text-blue-600 flex text-black text-2xl">
                 Services
                 <div className="pt-2 px-1">
-                {isDropdownOpen ? <SlArrowUp className="w-5 h-5" /> : <SlArrowDown className="w-5 h-5" />}
+                  {isDropdownOpen ? <SlArrowUp className="w-5 h-5" /> : <SlArrowDown className="w-5 h-5" />}
                 </div>
               </button>
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10" onClick={closeDropdown}>
+                <div className="absolute right-0 mt-2 w-48 bg-[#feeccd] border border-gray-200 rounded-lg shadow-lg z-10">
                   <Link to="/OldProduct" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Old Product</Link>
                   <Link to="/NewProduct" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">New Product</Link>
                   <Link to="/AutoService" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Auto Service</Link>
@@ -66,12 +83,16 @@ const Header = () => {
             <Link to="/About" onClick={handleNavbarItemClick} className="hover:underline underline-offset-8 hover:text-blue-600 text-black text-2xl">
               About us
             </Link>
-            <div className="relative">
-              <button onClick={toggleProfileDropdown} className="hover:underline underline-offset-8 hover:text-blue-600 flex text-white text-2xl pt-1">
+            <div
+              className="relative"
+              onMouseEnter={handleMouseEnterProfileDropdown}
+              onMouseLeave={handleMouseLeaveProfileDropdown}
+            >
+              <button className="hover:underline underline-offset-8 hover:text-blue-600 flex text-white text-2xl pt-1">
                 <FaUser />
               </button>
               {isProfileDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10" onClick={closeDropdown}>
+                <div className="absolute right-0 mt-2 w-48 bg-[#feeccd] border border-gray-200 rounded-lg shadow-lg z-10">
                   <Link to="/Profile" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Profile</Link>
                   <Link to="/Settings" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Settings</Link>
                   <Link to="/Logout" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Logout</Link>
@@ -90,19 +111,22 @@ const Header = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden text-center absolute top-20 right-0 bg-[#3BEA1E] border border-black shadow-lg rounded-lg w-full flex flex-col items-end space-y-2 mt-2 p-4">
+          <div className="md:hidden text-center absolute top-20 right-0 bg-[#3BEA1E] border border-black shadow-lg rounded-lg w-full flex flex-col items-center space-y-2 mt-2 p-4">
             <Link to="/Home" onClick={handleNavbarItemClick} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 text-black">
               Home
             </Link>
-            <div className="relative">
-              <button onClick={toggleDropdown} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 flex text-black">
+            <div className="relative w-full">
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="text-xl hover:underline underline-offset-8 hover:text-blue-600 flex text-black w-full justify-center"
+              >
                 Services
                 <div className="pt-2 px-1">
-                {isDropdownOpen ? <SlArrowUp className="w-5 h-5" /> : <SlArrowDown className="w-5 h-5" />}
+                  {isDropdownOpen ? <SlArrowUp className="w-5 h-5" /> : <SlArrowDown className="w-5 h-5" />}
                 </div>
               </button>
               {isDropdownOpen && (
-                <div className="absolute right-28 top-[-57px] mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl" onClick={closeDropdown}>
+                <div className="w-full bg-[#feeccd] border border-gray-200 rounded-lg shadow-xl mt-2">
                   <Link to="/OldProduct" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Old Product</Link>
                   <Link to="/NewProduct" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">New Product</Link>
                   <Link to="/AutoService" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Auto Service</Link>
@@ -110,21 +134,28 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <Link to="/About" onClick={handleNavbarItemClick} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 text-black">
-              About us
-            </Link>
-            <div className="relative">
-              <button onClick={toggleProfileDropdown} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 flex text-white pt-1">
-                <FaUser />
-              </button>
-              {isProfileDropdownOpen && (
-                <div className="absolute right-28 top-[-90px] mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-xl" onClick={closeDropdown}>
-                  <Link to="/Profile" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Profile</Link>
-                  <Link to="/Settings" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Settings</Link>
-                  <Link to="/Logout" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Logout</Link>
+            {!isDropdownOpen && (
+              <>
+                <Link to="/About" onClick={handleNavbarItemClick} className="text-xl hover:underline underline-offset-8 hover:text-blue-600 text-black">
+                  About us
+                </Link>
+                <div className="relative w-full">
+                  <button
+                    onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                    className="text-xl hover:underline underline-offset-8 hover:text-blue-600 flex text-white w-full justify-center pt-1"
+                  >
+                    <FaUser />
+                  </button>
+                  {isProfileDropdownOpen && (
+                    <div className="w-full bg-[#feeccd] border border-gray-200 rounded-lg shadow-xl mt-2">
+                      <Link to="/Profile" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Profile</Link>
+                      <Link to="/Settings" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Settings</Link>
+                      <Link to="/Logout" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Logout</Link>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </>
+            )}
           </div>
         )}
       </div>
