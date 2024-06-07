@@ -16,6 +16,7 @@
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.1",
     "react-typed": "^2.0.12",
+    "react-typewriter-effect": "^1.1.0",
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
