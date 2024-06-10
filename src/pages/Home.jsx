@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import Typewriter from "typewriter-effect";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Signin from "./Signin";
 
 const slides = [
   "https://wallpapers.com/images/featured/food-delivery-uzm1ss89qzgz2qtu.jpg",
@@ -79,10 +81,13 @@ export default function Home() {
                   wrapperClassName="typewriter-text"
                 />
               </h1>
-
+              
+              <Link to="/Signin">
               <button className="bg-[#3BEA1E] hover:bg-blue-600 text-black hover:text-white font-bold py-1 md:py-2 px-2 md:px-4 rounded-xl mt-14">
                 Get started
               </button>
+              </Link>
+              
             </div>
             {/* Right-Side */}
             <div className="carousel rounded-3xl relative overflow-hidden">
