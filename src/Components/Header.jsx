@@ -3,6 +3,19 @@ import { Link } from 'react-router-dom';
 import { SlArrowDown, SlArrowUp } from 'react-icons/sl';
 import { FaUser } from 'react-icons/fa';
 
+const servicesDropdownLinks = [
+  { to: "/OldProduct", label: "Old Product" },
+  { to: "/NewProduct", label: "New Product" },
+  { to: "/AutoService", label: "Auto Service" },
+  { to: "/RestaurantService", label: "Restaurant Service" }
+];
+
+const profileDropdownLinks = [
+  { to: "/Profile", label: "Profile" },
+  { to: "/Settings", label: "Settings" },
+  { to: "/Logout", label: "Logout" }
+];
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -51,7 +64,7 @@ const Header = () => {
   return (
     <>
       <div className="sticky top-0 z-50">
-        <div className="h-16 border border-black flex justify-between items-center px-4 md:px-16 bg-[#3BEA1E] rounded-b-lg">
+        <div className="h-16 border border-black flex justify-between items-center px-4 md:px-16 bg-[#3BEA1E] rounded-b-xl">
           <div>
             <h1 className="text-xl md:text-2xl font-bold">LOGO NAME</h1>
           </div>
@@ -73,10 +86,16 @@ const Header = () => {
               </button>
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-[#feeccd] border border-gray-200 rounded-lg shadow-lg z-10">
-                  <Link to="/OldProduct" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Old Product</Link>
-                  <Link to="/NewProduct" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">New Product</Link>
-                  <Link to="/AutoService" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Auto Service</Link>
-                  <Link to="/RestaurantService" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Restaurant Service</Link>
+                  {servicesDropdownLinks.map((link, index) => (
+                    <Link
+                      key={index}
+                      to={link.to}
+                      onClick={handleNavbarItemClick}
+                      className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
@@ -88,14 +107,21 @@ const Header = () => {
               onMouseEnter={handleMouseEnterProfileDropdown}
               onMouseLeave={handleMouseLeaveProfileDropdown}
             >
-              <button className="hover:underline underline-offset-8 hover:text-blue-600 flex text-white text-2xl pt-1">
+              <button className="hover:underline underline-offset-8 hover:text-blue-600 flex text-black text-2xl pt-1">
                 <FaUser />
               </button>
               {isProfileDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-[#feeccd] border border-gray-200 rounded-lg shadow-lg z-10">
-                  <Link to="/Profile" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Profile</Link>
-                  <Link to="/Settings" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Settings</Link>
-                  <Link to="/Logout" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Logout</Link>
+                  {profileDropdownLinks.map((link, index) => (
+                    <Link
+                      key={index}
+                      to={link.to}
+                      onClick={handleNavbarItemClick}
+                      className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
@@ -127,10 +153,16 @@ const Header = () => {
               </button>
               {isDropdownOpen && (
                 <div className="w-full bg-[#feeccd] border border-gray-200 rounded-lg shadow-xl mt-2">
-                  <Link to="/OldProduct" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Old Product</Link>
-                  <Link to="/NewProduct" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">New Product</Link>
-                  <Link to="/AutoService" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Auto Service</Link>
-                  <Link to="/RestaurantService" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Restaurant Service</Link>
+                  {servicesDropdownLinks.map((link, index) => (
+                    <Link
+                      key={index}
+                      to={link.to}
+                      onClick={handleNavbarItemClick}
+                      className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
@@ -142,15 +174,22 @@ const Header = () => {
                 <div className="relative w-full">
                   <button
                     onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                    className="text-xl hover:underline underline-offset-8 hover:text-blue-600 flex text-white w-full justify-center pt-1"
+                    className="text-xl hover:underline underline-offset-8 hover:text-blue-600 flex text-black w-full justify-center pt-1"
                   >
                     <FaUser />
                   </button>
                   {isProfileDropdownOpen && (
                     <div className="w-full bg-[#feeccd] border border-gray-200 rounded-lg shadow-xl mt-2">
-                      <Link to="/Profile" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Profile</Link>
-                      <Link to="/Settings" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Settings</Link>
-                      <Link to="/Logout" onClick={handleNavbarItemClick} className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg">Logout</Link>
+                      {profileDropdownLinks.map((link, index) => (
+                        <Link
+                          key={index}
+                          to={link.to}
+                          onClick={handleNavbarItemClick}
+                          className="block px-4 py-2 text-base hover:bg-[#3BEA1E] rounded-lg"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
                     </div>
                   )}
                 </div>
