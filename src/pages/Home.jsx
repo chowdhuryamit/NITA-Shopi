@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 import Typewriter from "typewriter-effect";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Signin from "./Signin";
+import { Link } from "react-router-dom";
 
 const slides = [
   "https://wallpapers.com/images/featured/food-delivery-uzm1ss89qzgz2qtu.jpg",
