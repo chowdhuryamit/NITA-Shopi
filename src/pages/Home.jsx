@@ -10,6 +10,37 @@ const slides = [
   "https://cdni.iconscout.com/illustration/premium/thumb/girl-doing-online-shopping-with-consumer-rights-5255956-4394675.png",
 ];
 
+const services = [
+  {
+    image: "https://cdn.dribbble.com/users/1118376/screenshots/4349141/rentbow.gif",
+    heading: "Old Product",
+    description: "Welcome to our treasure trove of lightly used products, where each item holds a story and awaits its new journey with you. Discover hidden gems today!",
+    link: "/OldProduct",
+    banner: "https://cdni.iconscout.com/illustration/premium/thumb/online-sell-and-buy-4863222-4050758.png",
+  },
+  {
+    image: "https://cdni.iconscout.com/illustration/premium/thumb/man-doing-online-grocery-shopping-6542183-5445154.png?f=webp",
+    heading: "New Product",
+    description: "Explore our collection of the latest top-notch items, offering incredible deals that you won't want to miss. Discover quality and savings combined in every purchase!",
+    link: "/NewProduct",
+    banner: "https://cdni.iconscout.com/illustration/premium/thumb/man-shopping-for-groceries-online-6756673-5628030.png?f=webp",
+  },
+  {
+    image: "https://img.freepik.com/free-vector/flat-design-indian-man-driving-van_23-2149757883.jpg",
+    heading: "Auto Service",
+    description: "Ready for a swift journey? Connect instantly with our reliable drivers for a seamless ride experience. Get moving effortlessly with just a tap!",
+    link: "/AutoService",
+    banner: "https://cdni.iconscout.com/illustration/premium/thumb/auto-rickshaw-service-5066967-4246744.png?f=webp",
+  },
+  {
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIJNXphMd92iYHzTfJZLsxkvgUS_iTANwFjQ&s",
+    heading: "Restaurants",
+    description: "Savor a diverse range of mouthwatering culinary delights that cater to every palate. From delectable desserts to savory dishes, indulge in a culinary journey like no other!",
+    link: "/RestaurantService",
+    banner: "https://static.vecteezy.com/system/resources/previews/007/240/072/non_2x/a-skillfully-crafted-flat-illustration-of-food-app-vector.jpg",
+  },
+];
+
 export default function Home() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
@@ -35,27 +66,8 @@ export default function Home() {
     );
   };
 
-  const services = [
-    {
-      image: "https://tse3.mm.bing.net/th/id/OIP.qGa4rZh-9Zof10CcbaIAfAHaF3?rs=1&pid=ImgDetMain",
-      description: "Uncover hidden gems in lightly used products!",
-    },
-    {
-      image: "https://static.vecteezy.com/system/resources/previews/016/471/452/original/abstract-modern-ecommerce-logo-ecommerce-logo-design-shop-logo-design-template-creative-ecommerce-logo-vector.jpg",
-      description: "Find the newest top items at amazing deals!",
-    },
-    {
-      image: "https://static.vecteezy.com/system/resources/previews/000/623/004/original/auto-car-logo-template-vector-icon.jpg",
-      description: "Need a quick ride? Link up with a driver now!",
-    },
-    {
-      image: "https://png.pngtree.com/template/20200704/ourlarge/pngtree-restaurant-logo-design-vector-template-image_388753.jpg",
-      description: "Indulge in a variety of tasty culinary treats!",
-    },
-  ];
-
   return (
-    <div className="">
+    <div>
       {/* Left-Side */}
       <section className="bg-[#FEECCD] bg-opacity-30 py-10 sm:py-16 lg:py-12">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -80,13 +92,12 @@ export default function Home() {
                   wrapperClassName="typewriter-text"
                 />
               </h1>
-              
+
               <Link to="/Signin">
-              <button className="bg-[#3BEA1E] hover:bg-blue-600 text-black hover:text-white font-bold py-1 md:py-2 px-2 md:px-4 rounded-xl mt-14">
-                Get started
-              </button>
+                <button className="bg-[#3BEA1E] hover:bg-blue-600 text-black hover:text-white font-bold py-1 md:py-2 px-2 md:px-4 rounded-xl mt-14">
+                  Get started
+                </button>
               </Link>
-              
             </div>
             {/* Right-Side */}
             <div className="carousel rounded-3xl relative overflow-hidden">
@@ -130,17 +141,54 @@ export default function Home() {
         </div>
         <div className="w-60 h-1 border-b-4 border-green-400 my-3"></div>
 
-        <div className="w-full bg-[#feeccd] bg-opacity-30 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4 pb-12 ">
+        <div className="w-full bg-[#feeccd] bg-opacity-30 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4 pb-12">
           {services.map((service, index) => (
-            <div key={index} className="flex flex-col justify-center items-center overflow-hidden pt-8">
-              <img
-                src={service.image}
-                alt=""
-                className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500 transform transition-transform duration-300 hover:scale-110"
-              />
-              <p className="font-semibold mt-4">
-                {service.description}
-              </p>
+            <Link key={index} to={service.link}>
+              <div className="flex p-4 flex-col justify-center items-center overflow-hidden pt-8">
+                <img
+                  src={service.image}
+                  alt=""
+                  className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-4 border-green-500 transform transition-transform duration-300 hover:scale-110"
+                />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center text-center">
+        <div className="w-full px-4 lg:px-8">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className={`flex flex-col lg:flex-row ${
+                index % 2 === 0 ? "lg:flex-row-reverse" : ""
+              } items-center justify-center py-6`}
+            >
+              <div
+                className={`w-full lg:w-1/2 flex justify-center px-4 ${
+                  index % 2 === 0 ? "right-banner" : "left-banner"
+                }`}
+              >
+                <img
+                  src={service.banner}
+                  alt={service.heading}
+                  className="rounded-b-2xl max-w-full h-auto"
+                />
+              </div>
+              <div
+                className={`w-full lg:w-1/2 flex flex-col items-start p-4 max-w-xs ${
+                  index % 2 === 0 ? "lg:items-end" : "lg:items-start"
+                }`}
+              >
+                <h3 className="text-2xl font-bold">{service.heading}</h3>
+                <p className="mt-4 text-xl">{service.description}</p>
+                <Link to={service.link}>
+                  <button className="bg-[#3BEA1E] hover:bg-blue-600 text-black hover:text-white font-bold py-2 px-4 rounded-xl mt-6">
+                    Learn More
+                  </button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
