@@ -22,7 +22,7 @@ export default function Footer() {
                 <a href="/login">Login</a>
               </li>
               <li className="mb-2 hover:underline">
-                <a href="/signup">SignUp</a>
+                <a href="/SignUp">SignUp</a>
               </li>
               <li className="mb-2 hover:underline">
                 <a href="/Logout">Logout</a>

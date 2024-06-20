@@ -185,7 +185,7 @@ export default function Home() {
                 <p className="mt-4 text-xl">{service.description}</p>
                 <Link to={service.link}>
                   <button className="bg-[#3BEA1E] hover:bg-blue-600 text-black hover:text-white font-bold py-2 px-4 rounded-xl mt-6">
-                    Learn More
+                    Explore
                   </button>
                 </Link>
               </div>

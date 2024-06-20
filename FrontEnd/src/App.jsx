@@ -8,7 +8,7 @@ import AutoService from './pages/AutoService';
 import RestaurantService from './pages/RestaurantService';
 import About from './pages/About';
 import Help from './pages/Help';
-import Signin from './pages/Signin';
+import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/RestaurantService" element={<RestaurantService />} />
           <Route path="/About" element={<About />} />
           <Route path="/Help" element={<Help />} />
-          <Route path="/Signin" element={<Signin/>} />
+          <Route path="/SignUp" element={<SignUp/>} />
           <Route path="/Login" element={<Login/>} />
         </Routes>
        <br />

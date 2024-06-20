@@ -79,9 +79,9 @@ function App() {
           {/* Sign Up Link */}
           <div className="flex flex-row items-center justify-center mt-4 w-full">
             <p>Don't have an Account?</p>
-            <Link to="/Signin">
+            <Link to="/SignUp">
               <button className="text-xl font-semibold underline ml-2 text-black">
-                Sign In
+                Sign Up
               </button>
             </Link>
           </div>
