@@ -93,7 +93,7 @@ export default function Home() {
                 />
               </h1>
 
-              <Link to="/Signin">
+              <Link to="/SignUp">
                 <button className="bg-[#3BEA1E] hover:bg-blue-600 text-black hover:text-white font-bold py-1 md:py-2 px-2 md:px-4 rounded-xl mt-14">
                   Get started
                 </button>
