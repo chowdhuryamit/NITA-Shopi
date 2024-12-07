@@ -88,7 +88,6 @@ const loginUser = async (req, res) => {
   }
 };
 
-
  const logoutUser = async (req, res) => {
   try {
     const token =
@@ -124,7 +123,39 @@ const loginUser = async (req, res) => {
   }
 };
 
+ const forgotPassword = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+
+    // Validate input
+    if (!email || !newPassword) {
+      return res.status(400).json({ message: "Email and new password are required" });
+    }
+
+    // Find the user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User with this email does not exist" });
+    }
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update the user's password in the database
+    user.password = hashedPassword;
+    await user.save();
+
+    return res.status(200).json({ message: "Password updated successfully" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
 export { registerUser,
   loginUser ,
-  logoutUser
+  logoutUser,
+  forgotPassword
  };
