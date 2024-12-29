@@ -1,6 +1,8 @@
-import { Product } from "../models/product.model";
-import mongoose from "mongoose";
+import { Router } from "express";
+import { upload } from "../middlewares/multer.middleware";
+import { verifyJWT } from "../middlewares/auth.middleware";
 
-const addProduct=async(req,res)=>{
-    const {name,description,}=req.body;
-}
+const router=Router();
+
+router.use(verifyJWT);
+
