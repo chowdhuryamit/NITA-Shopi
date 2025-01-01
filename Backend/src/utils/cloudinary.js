@@ -1,11 +1,14 @@
 import { v2 as cloudinary } from "cloudinary";
 import { log } from "console";
 import fs from "fs"
+import dotenv from "dotenv";
+
+dotenv.config();
 
 cloudinary.config({
-    cloud_name:"dufitirzo",
-    api_key:"928712265261123",
-    api_secret:"e6D-m5SkGd3MhcEAzIZseVv2Jmk",
+    cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
+    api_key:process.env.CLOUDINARY_API_KEY,
+    api_secret:process.env.CLOUDINARY_SECRET,
     secure:true
 })
 
@@ -25,7 +28,6 @@ const uploadOnCloudinary=async(localFilePath)=>{
         return response;
     }
    } catch (error) {
-    console.log(error);
     
     fs.unlinkSync(localFilePath);
     return null;
