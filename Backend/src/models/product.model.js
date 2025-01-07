@@ -28,7 +28,8 @@ const productSchema=new mongoose.Schema({
     },
     catagory:{
         type:String,
-        required:true
+        required:true,
+        lowercase:true
     }
 },{timestamps:true})
 

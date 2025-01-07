@@ -389,7 +389,91 @@ const getAllProduct=async(req,res)=>{
 }
 
 const getOldProduct=async(req,res)=>{
-  
+  const { page = 1, limit = 1 } = req.query;
+  const parsedLimit = parseInt(limit, 10);
+  const pageSkip = (parseInt(page, 10) - 1) * parsedLimit;
+  const sortStage = {};
+  sortStage["updatedAt"] = "asc" ? 1 : -1;
+
+  const products = await Product.aggregate([
+    {
+      $match: {
+        catagory:'old'
+      },
+    },
+    {
+      $project: {
+        name: 1,
+        price: 1,
+        image: 1,
+      },
+    },
+    {
+      $sort: sortStage,
+    },
+    {
+      $skip: pageSkip,
+    },
+    {
+      $limit: parsedLimit,
+    },
+  ]);
+
+  const totalDocuments = await Product.countDocuments({ quantity: { $gt: 0 } });
+  const totalPages = Math.ceil(totalDocuments / parsedLimit);
+
+  res.status(200).json({
+    message: "product fetched successfully",
+    currentPage: parseInt(page, 10),
+    totalPages,
+    totalItems: totalDocuments,
+    limit: parsedLimit,
+    data:products,
+  });
 }
 
-export { addProduct, getUserProduct, deleteProduct,updateProductInfo,updateProductImage,viewProduct,getAllProduct };
+const getNewProduct=async(req,res)=>{
+  const { page = 1, limit = 1 } = req.query;
+  const parsedLimit = parseInt(limit, 10);
+  const pageSkip = (parseInt(page, 10) - 1) * parsedLimit;
+  const sortStage = {};
+  sortStage["updatedAt"] = "asc" ? 1 : -1;
+
+  const products = await Product.aggregate([
+    {
+      $match: {
+        catagory:'new'
+      },
+    },
+    {
+      $project: {
+        name: 1,
+        price: 1,
+        image: 1,
+      },
+    },
+    {
+      $sort: sortStage,
+    },
+    {
+      $skip: pageSkip,
+    },
+    {
+      $limit: parsedLimit,
+    },
+  ]);
+
+  const totalDocuments = await Product.countDocuments({ quantity: { $gt: 0 } });
+  const totalPages = Math.ceil(totalDocuments / parsedLimit);
+
+  res.status(200).json({
+    message: "product fetched successfully",
+    currentPage: parseInt(page, 10),
+    totalPages,
+    totalItems: totalDocuments,
+    limit: parsedLimit,
+    data:products,
+  });
+}
+
+export { addProduct, getUserProduct, deleteProduct,updateProductInfo,updateProductImage,viewProduct,getAllProduct,getNewProduct,getOldProduct };
