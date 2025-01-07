@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { addProduct, deleteProduct, getAllProduct, getUserProduct, updateProductImage, updateProductInfo, viewProduct } from "../controllers/product.controller.js"
+import { addProduct, deleteProduct, getAllProduct, getNewProduct, getOldProduct, getUserProduct, updateProductImage, updateProductInfo, viewProduct } from "../controllers/product.controller.js"
 
 const router=Router();
 
@@ -14,5 +14,7 @@ router.patch('/updateProductInfo',updateProductInfo);
 router.patch('/updateProductImage',upload.single("productImage"),updateProductImage);
 router.get('/viewProduct',viewProduct);
 router.get('/getAllProduct',getAllProduct);
+router.get('/getOldProduct',getOldProduct);
+router.get('/getNewProduct',getNewProduct);
 
 export default router

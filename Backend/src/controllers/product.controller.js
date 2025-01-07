@@ -15,13 +15,13 @@ const addProduct = async (req, res) => {
         });
     }
 
-    const { name, price, description, quantity } = req.body;
+    const { name, price, description, quantity,catagory } = req.body;
 
-    if (!name || !price || !description || !quantity) {
+    if (!name || !price || !description || !quantity||!catagory) {
       return res
         .status(401)
         .json({
-          message: "name,price,description,quantity of the product is required",
+          message: "name,price,description,quantity,catagory of the product is required",
         });
     }
 
@@ -38,6 +38,7 @@ const addProduct = async (req, res) => {
         { description },
         { quantity },
         { owner: req.user._id },
+        {catagory}
       ],
     });
 
@@ -66,14 +67,35 @@ const addProduct = async (req, res) => {
       quantity,
       image: productImageUploadResponse?.secure_url,
       owner: req.user._id,
+      catagory
     });
 
     if (!product) {
-      return res
+      let lastIndexBackslash = productImageUploadResponse.lastIndexOf("/");
+      let lastIndexDot = productImageUploadResponse.lastIndexOf(".");
+
+      const productImagePublic_id = productImageUploadResponse.substring(
+      lastIndexBackslash + 1,
+      lastIndexDot
+      );
+
+      await cloudinary.uploader
+      .destroy(productImagePublic_id, { resource_type: 'image' })
+      .then(() => {
+        return res
         .status(500)
         .json({
           message: "some error occured while uploading product in database.",
         });
+      })
+      .catch(() => {
+        return res
+          .status(500)
+          .json({
+            message:
+              "error occured while deleting product image from cloudinary",
+          });
+      });
     } else {
       return res
         .status(200)
@@ -103,6 +125,7 @@ const getUserProduct = async (req, res) => {
           description: 1,
           quantity: 1,
           image: 1,
+          catagory:1
         },
       },
     ]);
@@ -143,7 +166,6 @@ const deleteProduct = async (req, res) => {
         .json({ message: "you are not the owner of this product" });
     }
 
-    await Product.findByIdAndDelete(product._id);
 
     const productImageUrl = product.image;
     
@@ -159,7 +181,8 @@ const deleteProduct = async (req, res) => {
 
     await cloudinary.uploader
       .destroy(productImagePublic_id, { resource_type: 'image' })
-      .then(() => {
+      .then(async() => {
+        await Product.findByIdAndDelete(product._id);
         return res
           .status(200)
           .json({ message: "product deleted successfully" });
@@ -196,7 +219,7 @@ const updateProductInfo=async(req,res)=>{
       return res.status(401).json({message:"you are not the owner of the product."});
     }
 
-    const {name,description,quantity,price,}=req.body;
+    const {name,description,quantity,price,catagory}=req.body;
 
     if(name){
       product.name=name;
@@ -209,6 +232,9 @@ const updateProductInfo=async(req,res)=>{
     }
     if(price){
       product.price=price;
+    }
+    if(catagory){
+      product.catagory=catagory;
     }
 
     await product.save({validateBeforeSave:false});
@@ -335,6 +361,7 @@ const getAllProduct=async(req,res)=>{
           name: 1,
           price: 1,
           image: 1,
+          catagory:1
         },
       },
       {
@@ -361,4 +388,92 @@ const getAllProduct=async(req,res)=>{
     });
 }
 
-export { addProduct, getUserProduct, deleteProduct,updateProductInfo,updateProductImage,viewProduct,getAllProduct };
+const getOldProduct=async(req,res)=>{
+  const { page = 1, limit = 1 } = req.query;
+  const parsedLimit = parseInt(limit, 10);
+  const pageSkip = (parseInt(page, 10) - 1) * parsedLimit;
+  const sortStage = {};
+  sortStage["updatedAt"] = "asc" ? 1 : -1;
+
+  const products = await Product.aggregate([
+    {
+      $match: {
+        catagory:'old'
+      },
+    },
+    {
+      $project: {
+        name: 1,
+        price: 1,
+        image: 1,
+      },
+    },
+    {
+      $sort: sortStage,
+    },
+    {
+      $skip: pageSkip,
+    },
+    {
+      $limit: parsedLimit,
+    },
+  ]);
+
+  const totalDocuments = await Product.countDocuments({ quantity: { $gt: 0 } });
+  const totalPages = Math.ceil(totalDocuments / parsedLimit);
+
+  res.status(200).json({
+    message: "product fetched successfully",
+    currentPage: parseInt(page, 10),
+    totalPages,
+    totalItems: totalDocuments,
+    limit: parsedLimit,
+    data:products,
+  });
+}
+
+const getNewProduct=async(req,res)=>{
+  const { page = 1, limit = 1 } = req.query;
+  const parsedLimit = parseInt(limit, 10);
+  const pageSkip = (parseInt(page, 10) - 1) * parsedLimit;
+  const sortStage = {};
+  sortStage["updatedAt"] = "asc" ? 1 : -1;
+
+  const products = await Product.aggregate([
+    {
+      $match: {
+        catagory:'new'
+      },
+    },
+    {
+      $project: {
+        name: 1,
+        price: 1,
+        image: 1,
+      },
+    },
+    {
+      $sort: sortStage,
+    },
+    {
+      $skip: pageSkip,
+    },
+    {
+      $limit: parsedLimit,
+    },
+  ]);
+
+  const totalDocuments = await Product.countDocuments({ quantity: { $gt: 0 } });
+  const totalPages = Math.ceil(totalDocuments / parsedLimit);
+
+  res.status(200).json({
+    message: "product fetched successfully",
+    currentPage: parseInt(page, 10),
+    totalPages,
+    totalItems: totalDocuments,
+    limit: parsedLimit,
+    data:products,
+  });
+}
+
+export { addProduct, getUserProduct, deleteProduct,updateProductInfo,updateProductImage,viewProduct,getAllProduct,getNewProduct,getOldProduct };

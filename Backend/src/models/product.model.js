@@ -25,6 +25,11 @@ const productSchema=new mongoose.Schema({
     owner:{
         type:Schema.Types.ObjectId,
         ref:"User"
+    },
+    catagory:{
+        type:String,
+        required:true,
+        lowercase:true
     }
 },{timestamps:true})
 
