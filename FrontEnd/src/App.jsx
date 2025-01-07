@@ -10,6 +10,7 @@ import About from './pages/About';
 import Help from './pages/Help';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/Help" element={<Help />} />
           <Route path="/SignUp" element={<SignUp/>} />
           <Route path="/Login" element={<Login/>} />
+          <Route path="/ForgotPassword" element={<ForgotPassword/>} />
         </Routes>
        <br />
        <br />

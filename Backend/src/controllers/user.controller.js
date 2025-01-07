@@ -38,9 +38,9 @@ const registerUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
+const loginUser  = async (req, res) => {
   try {
-    const { email, fullname, password, phonenumber } = req.body;
+    const { email, password } = req.body;
 
     // Check if email is provided
     if (!email) {
@@ -50,7 +50,7 @@ const loginUser = async (req, res) => {
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: "User not found." });
+      return res.status(404).json({ message: "User  not found." });
     }
 
     // Validate password
@@ -63,30 +63,34 @@ const loginUser = async (req, res) => {
     const token = await user.generateaccesstoken();
 
     // Get logged-in user's details excluding the password
-    const loggedInUser = await User.findById(user._id).select("-password");
+    const loggedInUser  = await User.findById(user._id).select("-password");
 
     // Set cookie options
     const options = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Secure flag only in production
-      sameSite: "Strict", // Prevent CSRF attacks
-      maxAge: 24 * 60 * 60 * 1000 // 1 day expiration
+      secure: process.env.NODE_ENV === "production", // True in production
+      sameSite: "None",// Adjust for local testing
+      maxAge: 24 * 60 * 60 * 1000, // Cookie valid for 1 day
     };
+
+    console.log("Generated Token:", token);
+    console.log("Cookie Options:", options);
 
     // Send response
     return res
       .status(200)
       .cookie("accessToken", token, options)
       .json({
-        user: loggedInUser,
+        user: loggedInUser ,
         accessToken: token,
-        message: "User Logged In successfully",
+        message: "User  Loggede  In successfully",
       });
   } catch (error) {
-    console.error(error.message);
+    console.error("Login Error:", error.message);
     return res.status(500).json({ message: "Server error. Please try again later." });
   }
 };
+
 
  const logoutUser = async (req, res) => {
   try {
